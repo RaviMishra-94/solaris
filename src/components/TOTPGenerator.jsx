@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { AlertCircle, Copy, CheckCircle } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const TOTPGenerator = () => {
   const [secret, setSecret] = useState('');
@@ -20,7 +21,7 @@ const TOTPGenerator = () => {
     setResult('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/generate-totp', {
+      const response = await axios.post(`${API_BASE_URL}/api/generate-totp`, {
         secret: secret.trim()
       });
 
@@ -38,10 +39,40 @@ const TOTPGenerator = () => {
 
   const copyToClipboard = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(result);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      // First try the modern navigator.clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(result);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } else {
+        // Fallback for older browsers or non-HTTPS
+        const textArea = document.createElement('textarea');
+        textArea.value = result;
+        // Make it non-visible without removing it
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+          const successful = document.execCommand('copy');
+          if (!successful) {
+            throw new Error('Copy command was unsuccessful');
+          }
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+          console.error('Fallback: Oops, unable to copy', err);
+          setError('Failed to copy to clipboard');
+        } finally {
+          document.body.removeChild(textArea);
+        }
+      }
     } catch (err) {
+      console.error('Failed to copy: ', err);
       setError('Failed to copy to clipboard');
     }
   }, [result]);

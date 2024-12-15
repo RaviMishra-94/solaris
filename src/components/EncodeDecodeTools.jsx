@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { AlertCircle, Copy, CheckCircle } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const EncodeDecodeTools = () => {
   const [hashText, setHashText] = useState('');
@@ -14,7 +15,10 @@ const EncodeDecodeTools = () => {
     encode: false,
     decode: false
   });
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState({
+    hash: false,
+    base64: false
+  });
 
   const generateHash = async () => {
     if (!hashText.trim()) {
@@ -26,7 +30,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/generate-hash', {
+      const response = await axios.post(`${API_BASE_URL}/api/generate-hash`, {
         text: hashText,
         algorithm
       });
@@ -49,7 +53,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/encode-base64', {
+      const response = await axios.post(`${API_BASE_URL}/api/encode-base64`, {
         text: base64Text
       });
       setBase64Result(response.data.encoded);
@@ -71,7 +75,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/decode_base64', {
+      const response = await axios.post(`${API_BASE_URL}/api/decode_base64`, {
         text: base64Text
       });
       setBase64Result(response.data.decoded);
@@ -83,12 +87,41 @@ const EncodeDecodeTools = () => {
     }
   };
 
-  const copyToClipboard = useCallback(async (text) => {
+  const copyToClipboard = useCallback(async (text, type) => {
     try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      // First try the modern navigator.clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        setCopied(prev => ({ ...prev, [type]: true }));
+        setTimeout(() => setCopied(prev => ({ ...prev, [type]: false })), 2000);
+      } else {
+        // Fallback for older browsers or non-HTTPS
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+          const successful = document.execCommand('copy');
+          if (!successful) {
+            throw new Error('Copy command was unsuccessful');
+          }
+          setCopied(prev => ({ ...prev, [type]: true }));
+          setTimeout(() => setCopied(prev => ({ ...prev, [type]: false })), 2000);
+        } catch (err) {
+          console.error('Fallback: Oops, unable to copy', err);
+          setError('Failed to copy to clipboard');
+        } finally {
+          document.body.removeChild(textArea);
+        }
+      }
     } catch (err) {
+      console.error('Failed to copy: ', err);
       setError('Failed to copy to clipboard');
     }
   }, []);
@@ -137,10 +170,11 @@ const EncodeDecodeTools = () => {
               <div className="flex justify-between items-center">
                 <span>{hashResult}</span>
                 <button
-                  onClick={() => copyToClipboard(hashResult)}
+                  onClick={() => copyToClipboard(hashResult, 'hash')}
                   className="text-gray-600 hover:text-gray-800 ml-2"
+                  title={copied.hash ? 'Copied!' : 'Copy to clipboard'}
                 >
-                  {copied ? <CheckCircle size={20} /> : <Copy size={20} />}
+                  {copied.hash ? <CheckCircle size={20} /> : <Copy size={20} />}
                 </button>
               </div>
             </div>
@@ -186,10 +220,11 @@ const EncodeDecodeTools = () => {
               <div className="flex justify-between items-center">
                 <span>{base64Result}</span>
                 <button
-                  onClick={() => copyToClipboard(base64Result)}
+                  onClick={() => copyToClipboard(base64Result, 'base64')}
                   className="text-gray-600 hover:text-gray-800 ml-2"
+                  title={copied.base64 ? 'Copied!' : 'Copy to clipboard'}
                 >
-                  {copied ? <CheckCircle size={20} /> : <Copy size={20} />}
+                  {copied.base64 ? <CheckCircle size={20} /> : <Copy size={20} />}
                 </button>
               </div>
             </div>
