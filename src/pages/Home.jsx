@@ -34,6 +34,26 @@ const Home = () => {
     }).format(date);
   };
 
+  const formatISTTime = (date) => {
+    return new Intl.DateTimeFormat('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZone: 'Asia/Kolkata',
+      hour12: false,
+    }).format(date);
+  };
+
+  const formatISTDate = (date) => {
+    return new Intl.DateTimeFormat('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'Asia/Kolkata',
+    }).format(date);
+  };
+
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full">
@@ -42,19 +62,29 @@ const Home = () => {
         </h1>
 
         <div className="text-center mb-8">
-          <div className="bg-gray-100 rounded-lg p-4 mb-4">
-            <div className="text-4xl font-mono text-blue-600 mb-2">
-              {formatUTCTime(time)}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div className="bg-gray-100 rounded-lg p-4">
+              <div className="text-4xl font-mono text-blue-600 mb-2">
+                {formatUTCTime(time)}
+              </div>
+              <div className="text-gray-600">
+                {formatUTCDate(time)} UTC
+              </div>
             </div>
-            <div className="text-gray-600">
-              {formatUTCDate(time)} UTC
+            <div className="bg-gray-100 rounded-lg p-4">
+              <div className="text-4xl font-mono text-blue-600 mb-2">
+                {formatISTTime(time)}
+              </div>
+              <div className="text-gray-600">
+                {formatISTDate(time)} IST
+              </div>
             </div>
           </div>
           <p className="text-gray-600 text-lg mb-4">
-            We're working hard to bring you something amazing.
+            Tools to help you with your trading journey.
           </p>
           <p className="text-gray-600 text-lg">
-            In the meantime, check out our available tools:
+            Explore our scrip master, broker links, setup guides, and calculators:
           </p>
         </div>
 
