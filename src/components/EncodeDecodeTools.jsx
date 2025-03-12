@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { AlertCircle, Copy, CheckCircle } from 'lucide-react';
-import { API_BASE_URL } from '../config';
 
 const EncodeDecodeTools = () => {
   const [hashText, setHashText] = useState('');
@@ -30,7 +29,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/generate-hash`, {
+      const response = await axios.post('https://heliosravi.pythonanywhere.com/generate_hash', {
         text: hashText,
         algorithm
       });
@@ -53,7 +52,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/encode-base64`, {
+      const response = await axios.post('https://heliosravi.pythonanywhere.com/encode_base64', {
         text: base64Text
       });
       setBase64Result(response.data.encoded);
@@ -75,7 +74,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/decode_base64`, {
+      const response = await axios.post('https://heliosravi.pythonanywhere.com/decode_base64', {
         text: base64Text
       });
       setBase64Result(response.data.decoded);

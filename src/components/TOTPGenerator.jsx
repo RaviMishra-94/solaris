@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { AlertCircle, Copy, CheckCircle } from 'lucide-react';
-import { API_BASE_URL } from '../config';
 
 const TOTPGenerator = () => {
   const [secret, setSecret] = useState('');
@@ -21,11 +20,11 @@ const TOTPGenerator = () => {
     setResult('');
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/generate-totp`, {
+      const response = await axios.post('https://heliosravi.pythonanywhere.com/generate_totp', {
         secret: secret.trim()
       });
 
-      if (response.data.status) {
+      if (response.data && response.data.totp) {
         setResult(response.data.totp);
       } else {
         setError('Failed to generate TOTP');

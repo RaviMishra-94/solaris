@@ -13,7 +13,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center text-xl font-bold text-blue-600 hover:text-blue-700">
               <NavbarLogo />
-              Solaris Tools
+              Paisa Fintech
             </Link>
           </div>
 

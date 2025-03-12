@@ -38,7 +38,7 @@ const Home = () => {
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full">
         <h1 className="text-3xl font-bold text-black text-center mb-8">
-          Welcome to Solaris Tools
+          Welcome to Paisa Fintech
         </h1>
 
         <div className="text-center mb-8">
