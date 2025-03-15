@@ -42,48 +42,68 @@ const BarcodeGenerator = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-8">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl text-blue-600 text-center mb-6">Barcode Generator</h1>
-        <div className="space-y-4">
-          <input
-            type="text"
-            value={data}
-            onChange={(e) => setData(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Enter barcode data"
-          />
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="code128">Code 128</option>
-            <option value="ean13">EAN-13</option>
-            <option value="ean8">EAN-8</option>
-            <option value="upc">UPC</option>
-          </select>
-          <button
-            onClick={generateBarcode}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Generate Barcode
-          </button>
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-              {error}
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="max-w-2xl w-full mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-100 dark:border-gray-700 transition-colors duration-200">
+          <h1 className="text-2xl font-bold text-blue-600 dark:text-blue-400 text-center mb-8 transition-colors duration-200">Barcode Generator</h1>
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="barcode-data" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-200">Barcode Data</label>
+              <input
+                id="barcode-data"
+                type="text"
+                value={data}
+                onChange={(e) => setData(e.target.value)}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+                placeholder="Enter barcode data"
+              />
             </div>
-          )}
-          <div className="flex flex-col items-center space-y-4">
-            <svg ref={svgRef}></svg>
-            {data && (
-              <button
-                onClick={handleDownload}
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+
+            <div>
+              <label htmlFor="barcode-type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-200">Barcode Type</label>
+              <select
+                id="barcode-type"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-200"
               >
-                Download Barcode
-              </button>
+                <option value="code128">Code 128</option>
+                <option value="ean13">EAN-13</option>
+                <option value="ean8">EAN-8</option>
+                <option value="upc">UPC</option>
+              </select>
+            </div>
+
+            <button
+              onClick={generateBarcode}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            >
+              Generate Barcode
+            </button>
+
+            {error && (
+              <div className="bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg transition-colors duration-200">
+                {error}
+              </div>
             )}
+
+            <div className="flex flex-col items-center space-y-6 mt-8">
+              <div className="bg-white p-6 rounded-lg w-full overflow-x-auto flex justify-center">
+                <svg ref={svgRef} className="max-w-full"></svg>
+              </div>
+
+              {data && (
+                <button
+                  onClick={handleDownload}
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 flex items-center"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                  Download Barcode
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>

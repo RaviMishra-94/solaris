@@ -55,35 +55,35 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full">
-        <h1 className="text-3xl font-bold text-black text-center mb-8">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 max-w-2xl w-full transition-colors duration-200">
+        <h1 className="text-3xl font-bold text-black dark:text-white text-center mb-8 transition-colors duration-200">
           Welcome to Paisa Fintech
         </h1>
 
         <div className="text-center mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <div className="bg-gray-100 rounded-lg p-4">
-              <div className="text-4xl font-mono text-blue-600 mb-2">
+            <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 transition-colors duration-200">
+              <div className="text-4xl font-mono text-blue-600 dark:text-blue-400 mb-2 transition-colors duration-200">
                 {formatUTCTime(time)}
               </div>
-              <div className="text-gray-600">
+              <div className="text-gray-600 dark:text-gray-300 transition-colors duration-200">
                 {formatUTCDate(time)} UTC
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg p-4">
-              <div className="text-4xl font-mono text-blue-600 mb-2">
+            <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 transition-colors duration-200">
+              <div className="text-4xl font-mono text-blue-600 dark:text-blue-400 mb-2 transition-colors duration-200">
                 {formatISTTime(time)}
               </div>
-              <div className="text-gray-600">
+              <div className="text-gray-600 dark:text-gray-300 transition-colors duration-200">
                 {formatISTDate(time)} IST
               </div>
             </div>
           </div>
-          <p className="text-gray-600 text-lg mb-4">
+          <p className="text-gray-600 dark:text-gray-300 text-lg mb-4 transition-colors duration-200">
             Tools to help you with your trading journey.
           </p>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-200">
             Explore our scrip master, broker links, setup guides, and calculators:
           </p>
         </div>
@@ -91,37 +91,37 @@ const Home = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link
             to="/scripmaster"
-            className="bg-black hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
+            className="bg-black dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
           >
             Broker Scriptmaster
           </Link>
           <Link
             to="/totp"
-            className="bg-black hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
+            className="bg-black dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
           >
             TOTP Generator
           </Link>
           <Link
             to="/encode-decode"
-            className="bg-black hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
+            className="bg-black dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
           >
             Encode/Decode Tool
           </Link>
           <Link
             to="/qrcode"
-            className="bg-black hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
+            className="bg-black dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
           >
             QR Code Generator
           </Link>
           <Link
             to="/barcode"
-            className="bg-black hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
+            className="bg-black dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700"
           >
             Barcode Generator
           </Link>
           <Link
             to="/word-counter"
-            className="bg-black hover:bg-gray-800 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700 sm:col-span-2"
+            className="bg-black dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white text-lg font-semibold py-3 px-6 rounded-lg text-center transition-all duration-200 relative overflow-hidden before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-200%] hover:before:translate-x-[200%] before:transition-transform before:duration-700 sm:col-span-2"
           >
             Word Counter
           </Link>
