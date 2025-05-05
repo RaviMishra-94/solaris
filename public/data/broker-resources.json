@@ -1,100 +1,15 @@
 {
   "resources": [
     {
-      "title": "Complete Guide to Discount Brokers in India",
-      "url": "https://example.com/discount-brokers-guide",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&h=500",
-      "description": "A comprehensive comparison of the top discount brokers in India, including their fee structures, trading platforms, and customer support options.",
-      "categories": ["Discount Brokers", "India"],
-      "publishedDate": "2025-03-01"
-    },
-    {
-      "title": "Best Options Trading Platforms in 2025",
-      "url": "https://example.com/options-trading-platforms",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=800&h=500",
-      "description": "An in-depth analysis of the leading options trading platforms, highlighting their unique features, educational resources, and commission structures.",
-      "categories": ["Options Trading", "Platforms"],
-      "publishedDate": "2025-02-15"
-    },
-    {
-      "title": "How to Choose the Right Full-Service Broker",
-      "url": "https://example.com/full-service-broker-guide",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&h=500",
-      "description": "Learn how to select a full-service broker that meets your investment needs, with insights into research quality, advisory services, and fee transparency.",
-      "categories": ["Full-Service Brokers", "Investment Advice"],
-      "publishedDate": "2025-01-20"
-    },
-    {
-      "title": "Mobile Trading Apps Comparison 2025",
-      "url": "https://example.com/mobile-trading-apps",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=800&h=500",
-      "description": "A detailed review of the top mobile trading applications, covering user experience, available features, security measures, and performance on various devices.",
-      "categories": ["Mobile Trading", "Apps", "Technology"],
-      "publishedDate": "2025-03-10"
-    },
-    {
-      "title": "Tax-Efficient Trading Strategies with the Right Broker",
-      "url": "https://example.com/tax-efficient-trading",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&h=500",
-      "description": "Discover how to minimize your tax liability through strategic trading practices and choosing brokers with tax-optimized account options.",
-      "categories": ["Tax Planning", "Trading Strategies"],
-      "publishedDate": "2025-02-05"
-    },
-    {
-      "title": "International Trading: Best Brokers for Global Markets",
-      "url": "https://example.com/international-trading-brokers",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&h=500",
-      "description": "Explore the top brokers that offer access to international markets, with analysis of currency conversion fees, market access, and regulatory considerations.",
-      "categories": ["International Trading", "Global Markets"],
-      "publishedDate": "2025-01-15"
-    },
-    {
-      "title": "Understanding Broker Margin Requirements",
-      "url": "https://example.com/margin-requirements-explained",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=800&h=500",
-      "description": "A clear explanation of margin trading, including how different brokers set their requirements and the implications for your trading strategy.",
-      "categories": ["Margin Trading", "Risk Management"],
-      "publishedDate": "2025-02-28"
-    },
-    {
-      "title": "Algorithmic Trading: Broker Platforms Comparison",
-      "url": "https://example.com/algo-trading-platforms",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&h=500",
-      "description": "Compare the capabilities of various brokers for algorithmic trading, including API access, backtesting tools, and execution speed.",
-      "categories": ["Algorithmic Trading", "Technology", "Advanced Trading"],
-      "publishedDate": "2025-03-05"
-    },
-    {
-      "title": "Best Brokers for Beginners in 2025",
-      "url": "https://example.com/best-brokers-beginners",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=500",
-      "description": "A beginner-friendly guide to selecting your first broker, with emphasis on educational resources, intuitive platforms, and customer support.",
-      "categories": ["Beginners", "Education"],
-      "publishedDate": "2025-01-30"
-    },
-    {
-      "title": "Zero-Commission Brokers: Hidden Costs Revealed",
-      "url": "https://example.com/zero-commission-true-costs",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1607863680198-23d4b2565df0?auto=format&fit=crop&w=800&h=500",
-      "description": "An investigative look into zero-commission brokers, exploring payment for order flow, spread markups, and other potential hidden costs.",
-      "categories": ["Commission-Free", "Hidden Fees", "Trading Costs"],
-      "publishedDate": "2025-02-20"
-    },
-    {
-      "title": "Best Brokers for Day Trading in 2025",
-      "url": "https://example.com/day-trading-brokers",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&h=500",
-      "description": "A comprehensive guide to selecting brokers that cater to day traders, covering execution speed, platform stability, fee structures, and margin rates.",
-      "categories": ["Day Trading", "Active Trading"],
-      "publishedDate": "2025-03-15"
-    },
-    {
-      "title": "Crypto Trading: Top Brokers and Exchanges Compared",
-      "url": "https://example.com/crypto-brokers-exchanges",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&h=500",
-      "description": "Navigate the world of cryptocurrency trading with this comparison of traditional brokers offering crypto and dedicated crypto exchanges.",
-      "categories": ["Cryptocurrency", "Digital Assets"],
-      "publishedDate": "2025-02-10"
+      "id": "angelone-api-article",
+      "title": "How to Create Angel One API Credentials: A Complete Guide",
+      "contentPath": "/content/broker-articles/angelone-api-article.md",
+      "thumbnailUrl": "/images/resources/angelone-api.jpg",
+      "description": "Learn how to create and manage API credentials for Angel One's SmartAPI platform to build custom trading applications.",
+      "categories": ["API Integration", "Angel One", "Trading Platforms"],
+      "publishedDate": "2025-05-05",
+      "author": "Trading Tech Team",
+      "readTime": "6 min"
     }
   ]
 }

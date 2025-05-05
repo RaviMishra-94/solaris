@@ -95,6 +95,51 @@ const ScriptmasterLinks = () => {
       ]
     },
     {
+      name: 'Fyers',
+      links: [
+        {
+          title: 'All Exchanges & Segments Scripmaster',
+          url: 'https://drive.google.com/file/d/1y3HRRl8200DQByvR6D9x7OaWULFdCCR9/view?usp=sharing',
+          lastUpdated: '2025-03-13',
+          format: 'SQLITE(.db)'
+        },
+        {
+          title: 'Exchange-Specific Scriptmasters',
+          formats: [
+            {
+              name: 'NSE - Currency Derivatives (CSV)',
+              url: 'https://public.fyers.in/sym_details/NSE_CD.csv'
+            },
+            {
+              name: 'NSE - Equity Derivatives (CSV)',
+              url: 'https://public.fyers.in/sym_details/NSE_FO.csv'
+            },
+            {
+              name: 'NSE - Commodity (CSV)',
+              url: 'https://public.fyers.in/sym_details/NSE_COM.csv'
+            },
+            {
+              name: 'NSE - Capital Market (CSV)',
+              url: 'https://public.fyers.in/sym_details/NSE_CM.csv'
+            },
+            {
+              name: 'BSE - Capital Market (CSV)',
+              url: 'https://public.fyers.in/sym_details/BSE_COM.csv'
+            },
+            {
+              name: 'BSE - Equity Derivatives (CSV)',
+              url: 'https://public.fyers.in/sym_details/BSE_FO.csv'
+            },
+            {
+              name: 'MCX - Commodity (CSV)',
+              url: 'https://public.fyers.in/sym_details/MCX_COM.csv'
+            }
+          ],
+          lastUpdated: '2025-03-15'
+        }
+      ]
+    },
+    {
       name: 'ICICI Direct',
       links: [
         {

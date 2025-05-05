@@ -9,7 +9,7 @@ import QRCodeGenerator from './components/QRCodeGenerator';
 import BarcodeGenerator from './components/BarcodeGenerator';
 import WordCounter from './components/WordCounter';
 import BrokerResources from "./pages/BrokerResources";
-
+import Article from "./pages/Article";
 
 const App = () => {
   return (
@@ -24,6 +24,7 @@ const App = () => {
           <Route path="word-counter" element={<WordCounter />} />
           <Route path="/scripmaster" element={<ScripmasterLinks />} />
           <Route path="/resources" element={<BrokerResources />} />
+          <Route path="/article/:slug" element={<Article />} />
         </Route>
       </Routes>
     </Router>
