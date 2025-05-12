@@ -29,7 +29,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post('https://heliosravi.pythonanywhere.com/generate_hash', {
+      const response = await axios.post('https://api.paisafintech.com/paisafintech/api/generate-hash', {
         text: hashText,
         algorithm
       });
@@ -52,7 +52,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post('https://heliosravi.pythonanywhere.com/encode_base64', {
+      const response = await axios.post('https://api.paisafintech.com/paisafintech/api/encode-base64', {
         text: base64Text
       });
       setBase64Result(response.data.encoded);
@@ -74,7 +74,7 @@ const EncodeDecodeTools = () => {
     setError('');
 
     try {
-      const response = await axios.post('https://heliosravi.pythonanywhere.com/decode_base64', {
+      const response = await axios.post('https://api.paisafintech.com/paisafintech/api/decode-base64', {
         text: base64Text
       });
       setBase64Result(response.data.decoded);

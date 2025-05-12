@@ -1,7 +1,7 @@
 // pages/BrokerResources.jsx
 import { useState, useEffect } from 'react';
 import { Search, ExternalLink, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 
 const BrokerResources = () => {
   const [resources, setResources] = useState([]);
@@ -9,13 +9,24 @@ const BrokerResources = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [categories, setCategories] = useState(['All']);
 
   useEffect(() => {
-    fetch('/data/broker-resources.json')
+    // Fetch articles from the specified API endpoint
+    fetch('https://api.paisafintech.com/paisafintech/api/get-blogs')
       .then(response => response.json())
       .then(data => {
-        setResources(data.resources);
-        setFilteredResources(data.resources);
+        // Assuming the API returns an array of resources in data
+        // Adjust this based on the actual response structure
+        const blogs = Array.isArray(data) ? data : (data.resources || data.blogs || []);
+
+        setResources(blogs);
+        setFilteredResources(blogs);
+
+        // Extract unique categories from all resources
+        const allCategories = new Set(blogs.flatMap(resource => resource.categories || []));
+        setCategories(['All', ...allCategories]);
+
         setLoading(false);
       })
       .catch(error => {
@@ -24,8 +35,6 @@ const BrokerResources = () => {
       });
   }, []);
 
-  const categories = ['All', ...new Set(resources.flatMap(resource => resource.categories))];
-
   useEffect(() => {
     let result = resources;
 
@@ -33,24 +42,26 @@ const BrokerResources = () => {
       const lowercasedTerm = searchTerm.toLowerCase();
       result = result.filter(resource =>
         resource.title.toLowerCase().includes(lowercasedTerm) ||
-        resource.description.toLowerCase().includes(lowercasedTerm) ||
-        resource.categories.some(category => category.toLowerCase().includes(lowercasedTerm))
+        (resource.description && resource.description.toLowerCase().includes(lowercasedTerm)) ||
+        (resource.categories && resource.categories.some(category => category.toLowerCase().includes(lowercasedTerm)))
       );
     }
 
     if (activeCategory !== 'All') {
-      result = result.filter(resource => resource.categories.includes(activeCategory));
+      result = result.filter(resource =>
+        resource.categories && resource.categories.includes(activeCategory)
+      );
     }
 
     setFilteredResources(result);
   }, [searchTerm, activeCategory, resources]);
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+  // Create a URL-friendly slug from the title if not already provided
+  const getSlug = (resource) => {
+    return resource.slug || createSlug(resource.title);
   };
 
-  // Create a URL-friendly slug from the title
+  // Create a slug from title as fallback
   const createSlug = (title) => {
     return title
       .toLowerCase()
@@ -110,18 +121,24 @@ const BrokerResources = () => {
             {filteredResources.map((resource, index) => (
               <Link
                 key={index}
-                to={`/article/${createSlug(resource.title)}?path=${encodeURIComponent(resource.contentPath)}`}
+                to={`/article/${getSlug(resource)}`}
                 className="block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg border dark:border-gray-700 transition"
               >
                 <img
-                  src={resource.thumbnailUrl || '/images/default-resource.jpg'}
+                  src={
+                    resource.thumbnailUrl
+                      ? (resource.thumbnailUrl.startsWith('http')
+                          ? resource.thumbnailUrl
+                          : `https://api.paisafintech.com${resource.thumbnailUrl}`)
+                      : '/images/default-resource.jpg'
+                  }
                   alt={resource.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-48 object-cover rounded-t-lg"
                   onError={(e) => { e.target.src = '/images/default-resource.jpg'; }}
                 />
                 <div className="p-4">
                   <div className="flex flex-wrap gap-2 mb-2">
-                    {resource.categories.map((cat, i) => (
+                    {resource.categories && resource.categories.map((cat, i) => (
                       <span key={i} className="bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300 text-xs px-2 py-1 rounded">
                         {cat}
                       </span>
@@ -130,8 +147,14 @@ const BrokerResources = () => {
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{resource.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3">{resource.description}</p>
                   <div className="flex justify-between items-center mt-3 text-xs text-gray-500 dark:text-gray-400">
-                    <span className="flex items-center"><Clock size={14} className="mr-1" />{formatDate(resource.publishedDate)}</span>
-                    <span className="flex items-center"><ExternalLink size={14} className="mr-1" />{resource.author || 'Trading Tech Team'}</span>
+                    <span className="flex items-center">
+                      <Clock size={14} className="mr-1" />
+                      {resource.publishedDate}
+                    </span>
+                    <span className="flex items-center">
+                      <ExternalLink size={14} className="mr-1" />
+                      {resource.author || 'Trading Tech Team'}
+                    </span>
                   </div>
                 </div>
               </Link>

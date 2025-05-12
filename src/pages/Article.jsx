@@ -1,69 +1,75 @@
 // pages/Article.jsx
 import { useState, useEffect } from 'react';
-import { useParams, useSearchParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 
 const Article = () => {
   const { slug } = useParams();
-  const [searchParams] = useSearchParams();
-  const contentPath = searchParams.get('path');
 
   const [article, setArticle] = useState({
     title: slug.replace(/-/g, ' '),
     content: '',
     loading: true,
     error: null,
-    lastUpdated: null
+    lastUpdated: null,
+    author: null,
+    publishedDate: null,
+    readTime: null
   });
 
   useEffect(() => {
-    if (contentPath) {
-      fetch(contentPath)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to load article content');
-          }
-          return response.text();
-        })
-        .then(text => {
-          setArticle(prev => ({
-            ...prev,
-            content: text,
+    // Fetch all blogs from the PaisaFintech API
+    fetch('https://api.paisafintech.com/paisafintech/api/get-blogs')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to load articles');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Filter the blogs to find the one matching the current slug
+        const blogs = Array.isArray(data) ? data : (data.resources || data.blogs || []);
+        const currentArticle = blogs.find(blog => blog.slug === slug);
+
+        if (currentArticle) {
+          setArticle({
+            title: currentArticle.title || slug.replace(/-/g, ' '),
+            content: currentArticle.content || '',
             loading: false,
-            // Set a default last updated date if not found in the markdown
-            lastUpdated: new Date().toLocaleDateString('en-US', {
+            error: null,
+            lastUpdated: currentArticle.lastUpdated || new Date().toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric'
-            })
-          }));
-        })
-        .catch(error => {
-          console.error('Error loading article content:', error);
-          setArticle(prev => ({
-            ...prev,
-            loading: false,
-            error: error.message
-          }));
-        });
-    } else {
-      setArticle(prev => ({
-        ...prev,
-        loading: false,
-        error: 'Article path not provided'
-      }));
-    }
-  }, [contentPath]);
+            }),
+            author: currentArticle.author || 'Trading Tech Team',
+            publishedDate: currentArticle.publishedDate,
+            readTime: currentArticle.readTime || calculateReadingTime(currentArticle.content)
+          });
+        } else {
+          // If no article is found with the given slug
+          throw new Error('Article not found');
+        }
+      })
+      .catch(error => {
+        console.error('Error loading article content:', error);
+        setArticle(prev => ({
+          ...prev,
+          loading: false,
+          error: error.message
+        }));
+      });
+  }, [slug]);
 
-  // Function to extract title and last updated from markdown content
+  // Function to extract title and last updated from markdown content (only as fallback)
   useEffect(() => {
-    if (article.content) {
+    if (article.content && !article.title) {
       const lines = article.content.split('\n');
       let foundTitle = false;
 
       for (const line of lines) {
-        // Extract title from heading
+        // Extract title from heading if not provided in API data
         if (!foundTitle && line.startsWith('# ')) {
           setArticle(prev => ({
             ...prev,
@@ -72,8 +78,8 @@ const Article = () => {
           foundTitle = true;
         }
 
-        // Extract last updated date if format matches "Last updated: Month Day, Year"
-        if (line.startsWith('Last updated:')) {
+        // Extract last updated date if format matches and not provided in API data
+        if (!article.lastUpdated && line.startsWith('Last updated:')) {
           setArticle(prev => ({
             ...prev,
             lastUpdated: line.replace('Last updated:', '').trim()
@@ -81,7 +87,7 @@ const Article = () => {
         }
       }
     }
-  }, [article.content]);
+  }, [article.content, article.title, article.lastUpdated]);
 
   // Custom renderers for markdown content to apply Tailwind styles
   const customRenderers = {
@@ -102,7 +108,13 @@ const Article = () => {
     pre: ({ node, ...props }) => <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4 text-sm font-mono" {...props} />,
     strong: ({ node, ...props }) => <strong className="font-bold text-gray-900 dark:text-white" {...props} />,
     em: ({ node, ...props }) => <em className="italic text-gray-800 dark:text-gray-200" {...props} />,
-    img: ({ node, ...props }) => <img className="max-w-full h-auto rounded-lg my-4" {...props} alt={props.alt || ''} />,
+    img: ({ node, ...props }) => {
+      // Process src attribute if it exists
+      if (props.src && !props.src.startsWith('http')) {
+        props.src = `https://api.paisafintech.com${props.src}`;
+      }
+      return <img className="max-w-full h-auto rounded-lg my-4" {...props} alt={props.alt || ''} />;
+    },
     hr: ({ node, ...props }) => <hr className="my-6 border-gray-300 dark:border-gray-700" {...props} />,
     table: ({ node, ...props }) => <div className="overflow-x-auto my-4"><table className="min-w-full border-collapse border border-gray-300 dark:border-gray-700" {...props} /></div>,
     thead: ({ node, ...props }) => <thead className="bg-gray-100 dark:bg-gray-800" {...props} />,
@@ -114,12 +126,13 @@ const Article = () => {
 
   // Calculate reading time based on content length
   const calculateReadingTime = (content) => {
+    if (!content) return 0;
     const wordsPerMinute = 200;
     const words = content.split(/\s+/).length;
     return Math.ceil(words / wordsPerMinute);
   };
 
-  const readingTime = article.content ? calculateReadingTime(article.content) : 0;
+  const readingTime = article.readTime || (article.content ? calculateReadingTime(article.content) : 0);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
@@ -130,13 +143,6 @@ const Article = () => {
             <ArrowLeft size={20} className="mr-2" />
             Back to Resources
           </Link>
-        </div>
-
-        {/* Top ad space */}
-        <div className="max-w-4xl mx-auto mt-6 px-4 sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 text-center shadow-sm">
-            <p className="text-gray-500 dark:text-gray-400 text-sm">Advertisement Space</p>
-          </div>
         </div>
 
         {/* Main content */}
@@ -169,6 +175,11 @@ const Article = () => {
                     <Clock size={16} className="mr-1" />
                     <span>{readingTime} min read</span>
                   </div>
+                  {article.author && (
+                    <div className="flex items-center ml-6 mb-2">
+                      <span>Author: {article.author}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -209,15 +220,7 @@ const Article = () => {
             </article>
           )}
         </main>
-
-        {/* Bottom ad space */}
-        <div className="max-w-4xl mx-auto mb-12 px-4 sm:px-6 lg:px-8">
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 text-center shadow-sm">
-            <p className="text-gray-500 dark:text-gray-400 text-sm">Advertisement Space</p>
-          </div>
-        </div>
       </div>
-
       {/* Footer with proper background */}
       <div className="bg-gray-50 dark:bg-gray-900 py-4">
         <div className="max-w-4xl mx-auto px-4 text-center text-sm text-gray-500 dark:text-gray-400">

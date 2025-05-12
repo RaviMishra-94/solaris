@@ -20,7 +20,7 @@ const TOTPGenerator = () => {
     setResult('');
 
     try {
-      const response = await axios.post('https://heliosravi.pythonanywhere.com/generate_totp', {
+      const response = await axios.post('https://api.paisafintech.com/paisafintech/api/generate-totp', {
         secret: secret.trim()
       });
 
