@@ -12,7 +12,7 @@ const ScriptmasterLinks = () => {
 
   const brokerLinks = [
     {
-      name: 'Alicblue',
+      name: 'Aliceblue',
       links: [
         {
           title: 'All Exchanges & Segments Scripmaster',
@@ -236,75 +236,70 @@ const ScriptmasterLinks = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
+   return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-black dark:text-white mb-4 transition-colors duration-200">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight mb-3">
             Broker Scriptmaster Repository
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-200">
-            Access the latest scriptmaster files from various brokers. Files are available in multiple formats.
-            SQLite(.db) files are best for quick queries and can be used in Algos.
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 font-light max-w-3xl mx-auto">
+            Access the latest scriptmaster files from various brokers. Files are available in multiple formats, with SQLite(.db) being ideal for quick queries and algorithmic trading.
           </p>
-        </div>
+        </header>
 
-        <div className="mb-8 max-w-md mx-auto">
+        <div className="mb-10 max-w-xl mx-auto">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 transition-colors duration-200" size={20} />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
             <input
               type="text"
               placeholder="Search by broker name or category..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-200"
+              className="w-full pl-12 pr-6 py-3 border border-gray-300 dark:border-gray-700 rounded-full focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 focus:border-blue-400 dark:focus:border-blue-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-400"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filteredBrokers.map((broker) => (
-            <div key={broker.name} className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/30 p-6 hover:shadow-lg transition-all duration-200 border border-gray-100 dark:border-gray-700 transition-colors">
-              <div className="mb-4">
-                <h2 className="text-xl font-semibold text-black dark:text-white transition-colors duration-200">{broker.name}</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200">{broker.category}</p>
+            <div key={broker.name} className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl dark:shadow-gray-950/30 p-7 hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 transform hover:-translate-y-1">
+              <div className="mb-5">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-1">{broker.name}</h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{broker.category}</p>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {broker.links.map((link) => (
                   <div key={link.title} className="group">
                     <a
                       href={link.url}
                       target={link.url !== '#' && !link.formats ? "_blank" : ""}
                       rel={link.url !== '#' && !link.formats ? "noopener noreferrer" : ""}
-                      className="block p-3 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200"
+                      className="block p-4 rounded-xl bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-200 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md"
                       onClick={(e) => handleLinkClick(e, link, broker.name)}
                     >
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-3">
                           {link.formats ? (
-                            <List size={18} className="text-gray-600 dark:text-gray-300 transition-colors duration-200" />
+                            <List size={20} className="text-blue-600 dark:text-blue-400" />
                           ) : (
-                            <Download size={18} className="text-gray-600 dark:text-gray-300 transition-colors duration-200" />
+                            <Download size={20} className="text-green-600 dark:text-green-400" />
                           )}
-                          <span className="text-gray-900 dark:text-gray-100 transition-colors duration-200">{link.title}</span>
+                          <span className="text-gray-900 dark:text-gray-100 font-medium">{link.title}</span>
                         </div>
-                        {link.formats ? (
-                          <ExternalLink size={18} className="text-gray-400 group-hover:text-black dark:text-gray-500 dark:group-hover:text-white transition-colors duration-200" />
-                        ) : (
-                          <ExternalLink size={18} className="text-gray-400 group-hover:text-black dark:text-gray-500 dark:group-hover:text-white transition-colors duration-200" />
-                        )}
+                        <ExternalLink size={18} className="text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200" />
                       </div>
-                      <div className="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-400 flex-wrap transition-colors duration-200">
+                      <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 flex-wrap">
                         <Clock size={14} className="mr-1" />
                         <span>Updated: {link.lastUpdated}</span>
                         {link.format && (
-                          <span className="ml-3 px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded text-xs text-gray-800 dark:text-gray-200 transition-colors duration-200">
+                          <span className="ml-3 px-2 py-1 bg-blue-100 dark:bg-blue-900 rounded-md text-xs text-blue-800 dark:text-blue-200 font-semibold">
                             {link.format}
                           </span>
                         )}
                         {link.formats && (
-                          <span className="ml-3 px-2 py-1 bg-gray-200 dark:bg-gray-600 rounded text-xs text-gray-800 dark:text-gray-200 transition-colors duration-200">
+                          <span className="ml-3 px-2 py-1 bg-indigo-100 dark:bg-indigo-900 rounded-md text-xs text-indigo-800 dark:text-indigo-200 font-semibold">
                             Multiple Formats
                           </span>
                         )}
@@ -317,33 +312,32 @@ const ScriptmasterLinks = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center text-sm text-gray-500 dark:text-gray-400 transition-colors duration-200">
-          <p>
-            More will be added soon.
-          </p>
-        </div>
+        <footer className="mt-16 text-center text-sm text-gray-500 dark:text-gray-500">
+          <p>More will be added soon.</p>
+          <p className="mt-2 text-xs">Developed with ❤️ by Paisa Fintech Team</p>
+        </footer>
       </div>
 
       {/* Coming Soon Dialog */}
       {showDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full shadow-xl border border-gray-200 dark:border-gray-700 transition-colors duration-200">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-black dark:text-white transition-colors duration-200">{dialogTitle}</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full shadow-2xl border border-gray-200 dark:border-gray-700 transform scale-95 animate-fade-in-up">
+            <div className="flex justify-between items-center mb-5">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{dialogTitle}</h3>
               <button
                 onClick={() => setShowDialog(false)}
-                className="text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors duration-200 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
               >
                 <X size={24} />
               </button>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 mb-6 transition-colors duration-200">
-              {currentLink && `The ${currentLink.title} for this broker will be available soon. We are working on making this data accessible.`}
+            <p className="text-gray-600 dark:text-gray-300 mb-7 text-lg">
+              {currentLink && `The "${currentLink.title}" for this broker will be available soon. We are actively working to make this data accessible.`}
             </p>
             <div className="flex justify-end">
               <button
                 onClick={() => setShowDialog(false)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold"
               >
                 Close
               </button>
@@ -354,38 +348,38 @@ const ScriptmasterLinks = () => {
 
       {/* Formats Dialog */}
       {showFormatsDialog && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full shadow-xl border border-gray-200 dark:border-gray-700 transition-colors duration-200">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold text-black dark:text-white transition-colors duration-200">{dialogTitle}</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-70 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-8 max-w-md w-full shadow-2xl border border-gray-200 dark:border-gray-700 transform scale-95 animate-fade-in-up">
+            <div className="flex justify-between items-center mb-5">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{dialogTitle}</h3>
               <button
                 onClick={() => setShowFormatsDialog(false)}
-                className="text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors duration-200 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
               >
                 <X size={24} />
               </button>
             </div>
-            <div className="space-y-3 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
+            <div className="space-y-4 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent">
               {currentFormats && currentFormats.map((format, index) => (
                 <a
                   key={index}
                   href={format.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200"
+                  className="flex items-center justify-between p-4 rounded-xl bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-200 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md"
                 >
-                  <div className="flex items-center space-x-2">
-                    <Download size={16} className="text-gray-600 dark:text-gray-300 transition-colors duration-200" />
-                    <span className="text-gray-900 dark:text-gray-100 transition-colors duration-200">{format.name}</span>
+                  <div className="flex items-center space-x-3">
+                    <Download size={20} className="text-purple-600 dark:text-purple-400" />
+                    <span className="text-gray-900 dark:text-gray-100 font-medium">{format.name}</span>
                   </div>
-                  <ExternalLink size={16} className="text-gray-400 hover:text-black dark:text-gray-500 dark:hover:text-white transition-colors duration-200" />
+                  <ExternalLink size={18} className="text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200" />
                 </a>
               ))}
             </div>
-            <div className="flex justify-end mt-6">
+            <div className="flex justify-end mt-8">
               <button
                 onClick={() => setShowFormatsDialog(false)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold"
               >
                 Close
               </button>

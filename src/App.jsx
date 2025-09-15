@@ -10,6 +10,7 @@ import BarcodeGenerator from './components/BarcodeGenerator';
 import WordCounter from './components/WordCounter';
 import BrokerResources from "./pages/BrokerResources";
 import Article from "./pages/Article";
+import SurveillanceStocksSection from './components/SurveillanceStocksSection';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="word-counter" element={<WordCounter />} />
           <Route path="/scripmaster" element={<ScripmasterLinks />} />
           <Route path="/resources" element={<BrokerResources />} />
+          <Route path="/surveillance-stocks" element={<SurveillanceStocksSection />} />
           <Route path="/article/:slug" element={<Article />} />
         </Route>
       </Routes>
