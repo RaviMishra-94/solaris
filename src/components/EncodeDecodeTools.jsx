@@ -104,7 +104,7 @@ const EncodeDecodeTools = () => {
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-        
+
         try {
           const successful = document.execCommand('copy');
           if (!successful) {
@@ -170,11 +170,10 @@ const EncodeDecodeTools = () => {
               <button
                 onClick={generateHash}
                 disabled={loading.hash}
-                className={`w-full font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors duration-200 ${
-                  loading.hash 
-                    ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed opacity-70' 
+                className={`w-full font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors duration-200 ${loading.hash
+                    ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed opacity-70'
                     : 'bg-blue-600 hover:bg-blue-700 text-white'
-                }`}
+                  }`}
               >
                 {loading.hash ? 'Generating...' : 'Generate Hash'}
               </button>
@@ -216,22 +215,20 @@ const EncodeDecodeTools = () => {
                 <button
                   onClick={handleEncode}
                   disabled={loading.encode}
-                  className={`flex-1 font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors duration-200 ${
-                    loading.encode 
-                      ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed opacity-70' 
+                  className={`flex-1 font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors duration-200 ${loading.encode
+                      ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed opacity-70'
                       : 'bg-blue-600 hover:bg-blue-700 text-white'
-                  }`}
+                    }`}
                 >
                   {loading.encode ? 'Encoding...' : 'Encode'}
                 </button>
                 <button
                   onClick={handleDecode}
                   disabled={loading.decode}
-                  className={`flex-1 font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors duration-200 ${
-                    loading.decode 
-                      ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed opacity-70' 
+                  className={`flex-1 font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors duration-200 ${loading.decode
+                      ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed opacity-70'
                       : 'bg-blue-600 hover:bg-blue-700 text-white'
-                  }`}
+                    }`}
                 >
                   {loading.decode ? 'Decoding...' : 'Decode'}
                 </button>
