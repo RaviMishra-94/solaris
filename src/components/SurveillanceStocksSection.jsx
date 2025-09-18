@@ -33,21 +33,21 @@ const SurveillanceStocksSection = () => {
         </header>
 
         {/* Search input */}
-<div className="flex justify-center mb-10">
-  <div className="max-w-xl w-full relative">
-    <Search
-      className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
-      size={20}
-    />
-    <input
-      type="text"
-      placeholder="Search by symbol or category..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800 focus:border-blue-400 dark:focus:border-blue-600 transition-all duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500"
-    />
-  </div>
-</div>
+        <div className="flex justify-center mb-10">
+          <div className="max-w-xl w-full relative">
+            <Search
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+              size={20}
+            />
+            <input
+              type="text"
+              placeholder="Search by symbol or category..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-md focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800 focus:border-blue-400 dark:focus:border-blue-600 transition-all duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+            />
+          </div>
+        </div>
 
 
 

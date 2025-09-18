@@ -92,11 +92,10 @@ const TOTPGenerator = () => {
             <button
               onClick={generateTOTP}
               disabled={loading || !secret.trim()}
-              className={`w-full font-semibold py-3 rounded-xl transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
-                loading || !secret.trim()
+              className={`w-full font-semibold py-3 rounded-xl transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${loading || !secret.trim()
                   ? 'bg-blue-400 dark:bg-blue-500 cursor-not-allowed opacity-70'
                   : 'bg-blue-600 hover:bg-blue-700 text-white'
-              }`}
+                }`}
             >
               {loading ? 'Generating...' : 'Generate TOTP'}
             </button>
