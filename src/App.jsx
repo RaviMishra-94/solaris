@@ -24,6 +24,7 @@ const App = () => {
           <Route path="barcode" element={<BarcodeGenerator />} />
           <Route path="word-counter" element={<WordCounter />} />
           <Route path="/scripmaster" element={<ScripmasterLinks />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/resources" element={<BrokerResources />} />
           <Route path="/surveillance-stocks" element={<SurveillanceStocksSection />} />
           <Route path="/article/:slug" element={<Article />} />

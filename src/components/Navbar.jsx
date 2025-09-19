@@ -6,6 +6,7 @@ import { Sun, Moon, Menu, X, Bell, Info } from "lucide-react"; // Added Bell and
 
 // --- Constants for better organization ---
 const NAV_ITEMS = [
+  { to: "/home", label: "Home" },
   { to: "/scripmaster", label: "Scripmasters" },
   { to: "/resources", label: "Broker Resources" },
   { to: "/totp", label: "TOTP Generator" },
