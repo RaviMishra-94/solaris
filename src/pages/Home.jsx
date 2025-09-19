@@ -267,7 +267,6 @@ export default function Home() {
             <MarketIndexCard name="SENSEX" data={marketData.sensex} />
             <MarketIndexCard name="BANKNIFTY" data={marketData.bankNifty} />
             <MarketIndexCard name="FINNIFTY" data={marketData.finNifty} />
-
             <MarketIndexCard name="S&P 500" data={marketData.sp500} />
             <MarketIndexCard name="DOW JONES" data={marketData.dow} />
           </div>
