@@ -5,11 +5,27 @@ import { Link } from 'react-router-dom';
 // WARNING: Using public CORS proxies is INSECURE and UNRELIABLE. Use only for development/experimentation.
 // Recommended: deploy a tiny serverless proxy or use a CORS-enabled API for production.
 
+// --- updated symbols (India + GIFT/SGX fallback + major international indices) ---
 const symbols = {
+  // India
   nifty50: '^NSEI',
   sensex: '^BSESN',
   bankNifty: '^NSEBANK',
-  finNifty: '^CNXFIN'
+  finNifty: '^CNXFIN',
+
+  // GIFT / SGX Nifty (note: Yahoo may not have a canonical SGX ticker; fallback to onshore NIFTY)
+  giftNifty: '^NSEI', // replace with your preferred provider/ticker if you have one
+
+  // Major global indices (Yahoo Finance symbols)
+  sp500: '^GSPC',    // S&P 500
+  dow: '^DJI',      // Dow Jones Industrial Average
+  nasdaq: '^IXIC',  // NASDAQ Composite
+  ftse100: '^FTSE', // FTSE 100 (UK)
+  dax: '^GDAXI',    // DAX (Germany)
+  nikkei: '^N225',  // Nikkei 225 (Japan)
+  hangseng: '^HSI', // Hang Seng (Hong Kong)
+  sse: '^SSEC',     // Shanghai SSE Composite
+  asx200: '^AXJO'   // ASX 200 (Australia)
 };
 
 const initialLoadingState = Object.fromEntries(
@@ -255,11 +271,22 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* responsive grid that accommodates more cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
             <MarketIndexCard name="NIFTY 50" data={marketData.nifty50} />
             <MarketIndexCard name="SENSEX" data={marketData.sensex} />
             <MarketIndexCard name="BANKNIFTY" data={marketData.bankNifty} />
             <MarketIndexCard name="FINNIFTY" data={marketData.finNifty} />
+            <MarketIndexCard name="GIFT NIFTY (SGX)" data={marketData.giftNifty} />
+            <MarketIndexCard name="S&P 500" data={marketData.sp500} />
+            <MarketIndexCard name="DOW JONES" data={marketData.dow} />
+            <MarketIndexCard name="NASDAQ" data={marketData.nasdaq} />
+            <MarketIndexCard name="FTSE 100" data={marketData.ftse100} />
+            <MarketIndexCard name="DAX" data={marketData.dax} />
+            <MarketIndexCard name="NIKKEI 225" data={marketData.nikkei} />
+            <MarketIndexCard name="HANG SENG" data={marketData.hangseng} />
+            <MarketIndexCard name="SSE Composite" data={marketData.sse} />
+            <MarketIndexCard name="ASX 200" data={marketData.asx200} />
           </div>
         </section>
 
